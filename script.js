@@ -232,7 +232,7 @@ const CONTENT_DATA = [
         title: "Lag Jaa Gale",
         badge: "BONUS TRACK",
         thumbnail: "Lyrics that remind me of you/Thumbnails/Lag jaa gale se.jpg",
-        videoSrc: "Lyrics that remind me of you/Lag jaa gale (Aadya).opus",
+        videoSrc: "Lyrics that remind me of you/Lag jaa gale (Aadya).mp3",
         description: "bonus track (not my fav but as u sang it now it is my fav, but only in ur voice 🥰)",
         themeColors: {
           primary: "#FF1493",
@@ -1260,13 +1260,28 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
   const img = modal.querySelector("#player-img");
   const videoTitle = modal.querySelector(".player-title");
 
-  const isAudio = /\.(mp3|opus|wav|m4a|aac)$/i.test(src);
+  const isAudio = /\.(mp3|opus|wav|m4a|aac|ogg)$/i.test(src);
 
+  // Resume Web Audio Context if initialized
+  if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
+    playerAudioCtx.resume().catch(() => { });
+  }
+
+  video.pause();
+  video.removeAttribute("src");
   video.innerHTML = "";
-  video.src = src;
+  video.crossOrigin = "anonymous";
+  video.src = encodeURI(src);
 
   if (isAudio) {
-    if (videoView) videoView.style.display = "none";
+    if (videoView) {
+      videoView.style.display = "block";
+      videoView.style.position = "absolute";
+      videoView.style.opacity = "0.001";
+      videoView.style.pointerEvents = "none";
+      videoView.style.width = "1px";
+      videoView.style.height = "1px";
+    }
     if (audioView) audioView.style.display = "flex";
 
     const albumArt = document.getElementById("audio-album-art");
@@ -1313,8 +1328,12 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
 
     if (btnPlay) {
       btnPlay.onclick = () => {
+        if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
+          playerAudioCtx.resume().catch(() => { });
+        }
         if (video.paused) {
-          video.play().catch(() => { });
+          const p = video.play();
+          if (p !== undefined) p.catch(e => console.log("Audio play error:", e));
         } else {
           video.pause();
         }
@@ -1348,7 +1367,14 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
   } else {
     // Video mode
     if (audioView) audioView.style.display = "none";
-    if (videoView) videoView.style.display = "block";
+    if (videoView) {
+      videoView.style.display = "block";
+      videoView.style.position = "";
+      videoView.style.opacity = "";
+      videoView.style.pointerEvents = "";
+      videoView.style.width = "";
+      videoView.style.height = "";
+    }
 
     videoTitle.textContent = title || "";
     if (img) img.style.display = "none";
@@ -1357,7 +1383,12 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
   }
 
   video.load();
-  video.play().catch(() => { });
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(err => {
+      console.log("Auto play deferred:", err);
+    });
+  }
 
   modal.classList.add("active");
   document.body.classList.add("no-scroll");
