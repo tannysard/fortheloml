@@ -313,37 +313,37 @@ const CONTENT_DATA = [
     items: [
       {
         title: "Reel Idea #1",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel1.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_102737_249.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #2",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel2.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_102922_096.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #3",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel3.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_103114_160.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #4",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel4.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_103315_902.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #5",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel5.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_103509_558.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #6",
-        thumbnail: null,
+        thumbnail: "thumbnails/reels/reel6.jpg",
         videoSrc: "Reels to recreate with you/VID_20260812_103525_115.mp4",
         description: "Reel we're gonna recreate together 🎬"
       }
@@ -948,13 +948,13 @@ function buildContentRows() {
 
       if (item.thumbnail) {
         const img = document.createElement("img");
-        img.src = item.thumbnail;
+        img.src = encodeURI(item.thumbnail);
         img.alt = item.title;
         img.loading = "lazy";
         thumbWrap.appendChild(img);
       } else if (item.videoSrc && item.videoSrc.toLowerCase().endsWith(".mp4")) {
         const vid = document.createElement("video");
-        vid.src = item.videoSrc + "#t=0.1";
+        vid.src = encodeURI(item.videoSrc) + "#t=0.5";
         vid.preload = "metadata";
         vid.muted = true;
         vid.playsInline = true;
@@ -1071,15 +1071,28 @@ function buildVideoPlayer() {
 
 function openImageModal(src, title) {
   const modal = document.getElementById("video-player-modal");
+  const videoView = modal.querySelector("#player-video-view");
+  const audioView = modal.querySelector("#player-audio-view");
   const video = modal.querySelector("video");
   const img = modal.querySelector("#player-img");
   const videoTitle = modal.querySelector(".player-title");
+  const audioEl = document.getElementById("player-audio-element");
+
+  if (video) {
+    video.pause();
+    video.style.display = "none";
+  }
+  if (audioEl) {
+    audioEl.pause();
+  }
+
+  if (audioView) audioView.style.display = "none";
+  if (videoView) videoView.style.display = "block";
 
   videoTitle.textContent = title || "";
-  video.style.display = "none";
 
   if (img) {
-    img.src = src;
+    img.src = encodeURI(src);
     img.style.display = "block";
   }
 
@@ -1391,10 +1404,18 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
       videoView.style.height = "";
     }
 
-    videoTitle.textContent = title || "";
-    if (img) img.style.display = "none";
     video.style.display = "block";
     video.style.height = "100%";
+    video.controls = true;
+    video.playsInline = true;
+    video.crossOrigin = "anonymous";
+    video.src = encodeURI(src);
+
+    videoTitle.textContent = title || "";
+    if (img) {
+      img.src = "";
+      img.style.display = "none";
+    }
   }
 
   video.load();
