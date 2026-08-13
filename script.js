@@ -42,17 +42,17 @@ const introText = "KUCHU PUCHU";
 // OPTIONAL: replace the synthesized sound with your own audio file:
 // Set this to a file path like "sounds/tudum.mp3" or leave as null
 // to use the auto-generated Web Audio API sound.
-const AUDIO_SRC = "Netflix New Logo Animation 2019.mp3";
+const AUDIO_SRC = "media/audio/tudum.mp3";
 
 const profiles = [
   {
     name: "You",
-    avatar: "thumbnails/her.jpg",
+    avatar: "media/thumbnails/profile/her.jpg",
     color: "#E87C03"
   },
   {
     name: "Me",
-    avatar: "thumbnails/me.jpg",
+    avatar: "media/thumbnails/profile/me.jpg",
     color: "#E50914"
   }
 ];
@@ -77,7 +77,7 @@ const heroContent = {
   title: "HAPPIESTT BIRTHDAYY AADYAAA ❤️",
   meta: "Romance • 2026 • Forever • TV-LOVE",
   description: "Made this website for my special person's birthday cuz apna relationship mein aane ka process was not less than a movie 😙❤️",
-  bgImage: "thumbnails/hero_bg.jpg",         // ← Main screen background image
+  bgImage: "media/thumbnails/profile/hero_bg.jpg",         // ← Main screen background image
   bgPosition: "center",                       // ← Centered positioning for 16:9 hero background
   bgVideo: null,         // ← e.g. "videos/hero_loop.mp4"  (or null for static image)
   videoSrc: null         // ← e.g. "videos/featured_video.mp4"
@@ -108,55 +108,55 @@ const CONTENT_DATA = [
     items: [
       {
         title: "Ice Cream",
-        thumbnail: "Usssss/20260803_180830.jpg",
+        thumbnail: "media/thumbnails/us/ice-cream.jpg",
         videoSrc: null,
         description: "bbg enjoying ice-cream (Eating like a small child)"
       },
       {
         title: "Sportify",
-        thumbnail: "Usssss/IMG-20250927-WA0078.jpg",
+        thumbnail: "media/thumbnails/us/sportify.jpg",
         videoSrc: null,
         description: "Damn u look soooo goood in ts. (And mein chomu on the other hand)"
       },
       {
         title: "Library ke baahar",
-        thumbnail: "Usssss/IMG-20251029-WA0021.jpg",
+        thumbnail: "media/thumbnails/us/library.jpg",
         videoSrc: null,
         description: "U looking da best as usual and me trying to act tuff"
       },
       {
         title: "BCC",
-        thumbnail: "Usssss/IMG-20260220-WA0006.jpg",
+        thumbnail: "media/thumbnails/us/bcc.jpg",
         videoSrc: null,
         description: "Bhai ts day i will never forget ofc uk why 😉"
       },
       {
         title: "My Gwen Stacy",
-        thumbnail: "Usssss/IMG-20260806-WA0025.jpg",
+        thumbnail: "media/thumbnails/us/gwen-stacy.jpg",
         videoSrc: null,
         description: "Meri Gwen Stacy (ft. ur forehead 🤣)"
       },
       {
         title: "The Collage",
-        thumbnail: "Usssss/IMG_20260806_191557_075.webp",
+        thumbnail: "media/thumbnails/us/collage.webp",
         videoSrc: null,
         description: "This collage looks soooooo goooodd !!!!"
       },
       {
         title: "You Moment",
-        thumbnail: "Usssss/Screenshot 2026-08-10 01054600.png",
+        thumbnail: "media/thumbnails/us/you-moment.png",
         videoSrc: null,
         description: "You wondering yeh kaaha fas gyi mein (teri phat rhi haain)"
       },
       {
         title: "Movie night virtual date",
-        thumbnail: "Usssss/Screenshot 2026-08-10 020348.png",
+        thumbnail: "media/thumbnails/us/movie-night-1.png",
         videoSrc: null,
         description: "You trying ur best to act like teri nhi phat rhi haain"
       },
       {
         title: "Movie night virtual date",
-        thumbnail: "Usssss/her 2.png",
+        thumbnail: "media/thumbnails/us/movie-night-2.png",
         videoSrc: null,
         description: "You no longer able to pretend teri nhi phat rhi haain. (me looking like a greek god 😙)"
       }
@@ -170,8 +170,8 @@ const CONTENT_DATA = [
     items: [
       {
         title: "Humdard",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/Humdard.jpg",
-        videoSrc: "Lyrics that remind me of you/Humdard Ek Villain.mp3",
+        thumbnail: "media/thumbnails/songs/humdard.jpg",
+        videoSrc: "media/audio/humdard.mp3",
         description: "Humdard",
         themeColors: {
           primary: "#A033FF",
@@ -182,8 +182,8 @@ const CONTENT_DATA = [
       },
       {
         title: "Tenu Sang Rakhna",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/Tenu Sang Rakhna (From _Jigra_).jpg",
-        videoSrc: "Lyrics that remind me of you/Tenu Sang Rakhna.mp3",
+        thumbnail: "media/thumbnails/songs/tenu-sang-rakhna.jpg",
+        videoSrc: "media/audio/tenu-sang-rakhna.mp3",
         description: "Tenu Sang Rakhna",
         themeColors: {
           primary: "#FF7F50",
@@ -194,8 +194,8 @@ const CONTENT_DATA = [
       },
       {
         title: "Ham Tere Pyar Mein",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/hum tere pyaar mein.jpg",
-        videoSrc: "Lyrics that remind me of you/Ham Tere Pyar Mein.mp3",
+        thumbnail: "media/thumbnails/songs/ham-tere-pyar-mein.jpg",
+        videoSrc: "media/audio/ham-tere-pyar-mein.mp3",
         description: "Ham Tere Pyar Mein",
         themeColors: {
           primary: "#E50914",
@@ -206,8 +206,8 @@ const CONTENT_DATA = [
       },
       {
         title: "Kalank Title Track",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/kalank.jpg",
-        videoSrc: "Lyrics that remind me of you/Kalank - Title track.mp3",
+        thumbnail: "media/thumbnails/songs/kalank.jpg",
+        videoSrc: "media/audio/kalank-title-track.mp3",
         description: "Kalank Title Track ",
         themeColors: {
           primary: "#FFD700",
@@ -218,8 +218,8 @@ const CONTENT_DATA = [
       },
       {
         title: "Khat",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/khat.jpg",
-        videoSrc: "Lyrics that remind me of you/Khat.mp3",
+        thumbnail: "media/thumbnails/songs/khat.jpg",
+        videoSrc: "media/audio/khat.mp3",
         description: "Khat",
         themeColors: {
           primary: "#00F2FE",
@@ -231,8 +231,8 @@ const CONTENT_DATA = [
       {
         title: "Lag Jaa Gale",
         badge: "BONUS TRACK",
-        thumbnail: "Lyrics that remind me of you/Thumbnails/Lag jaa gale se.jpg",
-        videoSrc: "Lyrics that remind me of you/Lag jaa gale (Aadya).mp3",
+        thumbnail: "media/thumbnails/songs/lag-jaa-gale.jpg",
+        videoSrc: "media/audio/lag-jaa-gale.mp3",
         description: "bonus track (not my fav but as u sang it now it is my fav, but only in ur voice 🥰)",
         themeColors: {
           primary: "#FF1493",
@@ -251,55 +251,55 @@ const CONTENT_DATA = [
     items: [
       {
         title: "Stargazing",
-        thumbnail: "Places to visit with her/starglazing.jpg",
+        thumbnail: "media/thumbnails/places/stargazing.jpg",
         videoSrc: null,
         description: "I would def go stargazing with you but i would still end up staring at you the whole time."
       },
       {
         title: "Pancard Club",
-        thumbnail: "Places to visit with her/pancard club.jpg",
+        thumbnail: "media/thumbnails/places/pancard-club.jpg",
         videoSrc: null,
         description: "Pancard club with you will be so fun especially cuz tu phattu haain 🤣"
       },
       {
         title: "Ayodhya Ram Mandir",
-        thumbnail: "Places to visit with her/ayodhya ram mandir.jpg",
+        thumbnail: "media/thumbnails/places/ayodhya-ram-mandir.jpg",
         videoSrc: null,
         description: "To show Prabhu Shree Ram that Sita ne Kaliyug mein avataar le liya haain"
       },
       {
         title: "Dagdusheth Halwai Ganpati",
-        thumbnail: "Places to visit with her/dagdusheth.jpg",
+        thumbnail: "media/thumbnails/places/dagdusheth.jpg",
         videoSrc: null,
         description: "The place i yearned for you the most...🥺"
       },
       {
         title: "Skydiving Adventure",
-        thumbnail: "Places to visit with her/sky diving.jpg",
+        thumbnail: "media/thumbnails/places/skydiving.jpg",
         videoSrc: null,
         description: "THISSS WILLL BE SOOOOOOOO FUNNNNNNNNNNNNN !!!"
       },
       {
         title: "Underwater Diving",
-        thumbnail: "Places to visit with her/undewater diving.jpg",
+        thumbnail: "media/thumbnails/places/underwater-diving.jpg",
         videoSrc: null,
         description: "This will also be insaneeeeeeeeee !!!!"
       },
       {
         title: "Dandiya Night",
-        thumbnail: "Places to visit with her/Dandiya.jpg",
+        thumbnail: "media/thumbnails/places/dandiya.jpg",
         videoSrc: null,
         description: "Me n my gujju girl in dandiya....sochkar hi mast lagta haain"
       },
       {
         title: "Stadium pe jaake match",
-        thumbnail: "Places to visit with her/ICT FInals.jpg",
+        thumbnail: "media/thumbnails/places/ict-finals.jpg",
         videoSrc: null,
         description: "seeing cricket with you cuz ofc u love it"
       },
       {
         title: "Rio De Janeiro",
-        thumbnail: "Places to visit with her/Rio De Jeniero.jpg",
+        thumbnail: "media/thumbnails/places/rio-de-janeiro.jpg",
         videoSrc: null,
         description: "Cuz yeh waala mera bahut jyada fav haain 😭"
       },
@@ -313,38 +313,38 @@ const CONTENT_DATA = [
     items: [
       {
         title: "Reel Idea #1",
-        thumbnail: "thumbnails/reels/reel1.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_102737_249.mp4",
+        thumbnail: "media/thumbnails/reels/reel-1.jpg",
+        videoSrc: "media/videos/reel-1.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #2",
-        thumbnail: "thumbnails/reels/reel2.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_102922_096.mp4",
+        thumbnail: "media/thumbnails/reels/reel-2.jpg",
+        videoSrc: "media/videos/reel-2.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #3",
-        thumbnail: "thumbnails/reels/reel3.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_103114_160.mp4",
+        thumbnail: "media/thumbnails/reels/reel-3.jpg",
+        videoSrc: "media/videos/reel-3.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #4",
-        thumbnail: "thumbnails/reels/reel4.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_103315_902.mp4",
+        thumbnail: "media/thumbnails/reels/reel-4.jpg",
+        videoSrc: "media/videos/reel-4.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #5",
-        thumbnail: "thumbnails/reels/reel5.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_103509_558.mp4",
+        thumbnail: "media/thumbnails/reels/reel-5.jpg",
+        videoSrc: "media/videos/reel-5.mp4",
         description: "Reel we're gonna recreate together 🎬"
       },
       {
         title: "Reel Idea #6",
-        thumbnail: "thumbnails/reels/reel6.jpg",
-        videoSrc: "Reels to recreate with you/VID_20260812_103525_115.mp4",
+        thumbnail: "media/thumbnails/reels/reel-6.jpg",
+        videoSrc: "media/videos/reel-6.mp4",
         description: "Reel we're gonna recreate together 🎬"
       }
     ]
@@ -1288,8 +1288,9 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     if (audioView) audioView.style.display = "flex";
 
     const targetAudio = document.getElementById("player-audio-element") || video;
-    targetAudio.crossOrigin = "anonymous";
-    targetAudio.src = encodeURI(src);
+    targetAudio.removeAttribute("crossOrigin");
+    targetAudio.innerHTML = `<source src="${src}" type="audio/mpeg">`;
+    targetAudio.src = src;
     targetAudio.load();
 
     const albumArt = document.getElementById("audio-album-art");
@@ -1408,8 +1409,9 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     video.style.height = "100%";
     video.controls = true;
     video.playsInline = true;
-    video.crossOrigin = "anonymous";
-    video.src = encodeURI(src);
+    video.removeAttribute("crossOrigin");
+    video.innerHTML = `<source src="${src}" type="video/mp4">`;
+    video.src = src;
 
     videoTitle.textContent = title || "";
     if (img) {
