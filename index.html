@@ -139,8 +139,11 @@
         <div class="audio-ambient-glow" id="audio-ambient-glow"></div>
         <canvas id="player-visualizer-canvas" class="player-visualizer-canvas"></canvas>
 
+        <!-- Dedicated Audio Element for Music Playback -->
+        <audio id="player-audio-element" preload="auto" crossorigin="anonymous"></audio>
+
         <div class="audio-player-card">
-          <div class="album-art-container">
+          <div class="album-art-container" id="audio-album-clickable" title="Click to Play / Pause">
             <img id="audio-album-art" alt="Album Art" src="">
             <div class="vinyl-disc" id="vinyl-disc"></div>
           </div>
@@ -148,6 +151,12 @@
             <h2 class="audio-song-title" id="audio-song-title"></h2>
             <p class="audio-song-desc" id="audio-song-desc"></p>
           </div>
+
+          <!-- Prominent Play Button for Guaranteed User Gesture Playback -->
+          <button class="audio-main-play-btn" id="audio-main-play-btn">
+            <span class="play-btn-icon" id="audio-main-play-icon">▶</span>
+            <span class="play-btn-text" id="audio-play-btn-label">PLAY SONG</span>
+          </button>
 
           <!-- Progress Bar & Time -->
           <div class="audio-progress-wrap" id="audio-progress-wrap">

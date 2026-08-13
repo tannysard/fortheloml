@@ -1267,22 +1267,17 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     playerAudioCtx.resume().catch(() => { });
   }
 
-  video.pause();
-  video.removeAttribute("src");
-  video.innerHTML = "";
-  video.crossOrigin = "anonymous";
-  video.src = encodeURI(src);
+  // Stop any currently playing media
+  if (video) { video.pause(); }
 
   if (isAudio) {
-    if (videoView) {
-      videoView.style.display = "block";
-      videoView.style.position = "absolute";
-      videoView.style.opacity = "0.001";
-      videoView.style.pointerEvents = "none";
-      videoView.style.width = "1px";
-      videoView.style.height = "1px";
-    }
+    if (videoView) videoView.style.display = "none";
     if (audioView) audioView.style.display = "flex";
+
+    const targetAudio = document.getElementById("player-audio-element") || video;
+    targetAudio.crossOrigin = "anonymous";
+    targetAudio.src = encodeURI(src);
+    targetAudio.load();
 
     const albumArt = document.getElementById("audio-album-art");
     const songTitle = document.getElementById("audio-song-title");
@@ -1292,6 +1287,10 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     const progressFill = document.getElementById("audio-progress-fill");
     const progressBar = document.getElementById("audio-progress-bar");
     const btnPlay = document.getElementById("audio-btn-play");
+    const mainPlayBtn = document.getElementById("audio-main-play-btn");
+    const mainPlayLabel = document.getElementById("audio-play-btn-label");
+    const mainPlayIcon = document.getElementById("audio-main-play-icon");
+    const albumClickable = document.getElementById("audio-album-clickable");
     const btnRewind = document.getElementById("audio-btn-rewind");
     const btnForward = document.getElementById("audio-btn-forward");
     const playIcon = document.getElementById("audio-play-icon");
@@ -1301,54 +1300,62 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     if (songDesc) songDesc.textContent = description || "";
 
     const updatePlayState = () => {
-      if (video.paused) {
+      if (targetAudio.paused) {
         audioView.classList.remove("playing");
         if (playIcon) playIcon.innerHTML = `<polygon points="5,3 19,12 5,21"/>`;
+        if (mainPlayIcon) mainPlayIcon.textContent = "▶";
+        if (mainPlayLabel) mainPlayLabel.textContent = "TAP TO PLAY SONG";
+        if (mainPlayBtn) mainPlayBtn.classList.add("pulsating");
       } else {
         audioView.classList.add("playing");
         if (playIcon) playIcon.innerHTML = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
+        if (mainPlayIcon) mainPlayIcon.textContent = "⏸";
+        if (mainPlayLabel) mainPlayLabel.textContent = "PAUSE SONG";
+        if (mainPlayBtn) mainPlayBtn.classList.remove("pulsating");
       }
     };
 
-    video.onplay = updatePlayState;
-    video.onpause = updatePlayState;
+    targetAudio.onplay = updatePlayState;
+    targetAudio.onpause = updatePlayState;
 
-    video.ontimeupdate = () => {
-      if (timeCurrent) timeCurrent.textContent = formatPlayerTime(video.currentTime);
-      if (timeDuration && !isNaN(video.duration)) timeDuration.textContent = formatPlayerTime(video.duration);
-      if (progressFill && video.duration) {
-        const pct = (video.currentTime / video.duration) * 100;
+    targetAudio.ontimeupdate = () => {
+      if (timeCurrent) timeCurrent.textContent = formatPlayerTime(targetAudio.currentTime);
+      if (timeDuration && !isNaN(targetAudio.duration)) timeDuration.textContent = formatPlayerTime(targetAudio.duration);
+      if (progressFill && targetAudio.duration) {
+        const pct = (targetAudio.currentTime / targetAudio.duration) * 100;
         progressFill.style.width = `${pct}%`;
       }
     };
 
-    video.onloadedmetadata = () => {
-      if (timeDuration) timeDuration.textContent = formatPlayerTime(video.duration);
+    targetAudio.onloadedmetadata = () => {
+      if (timeDuration) timeDuration.textContent = formatPlayerTime(targetAudio.duration);
     };
 
-    if (btnPlay) {
-      btnPlay.onclick = () => {
-        if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
-          playerAudioCtx.resume().catch(() => { });
-        }
-        if (video.paused) {
-          const p = video.play();
-          if (p !== undefined) p.catch(e => console.log("Audio play error:", e));
-        } else {
-          video.pause();
-        }
-      };
-    }
+    const toggleAudioPlay = () => {
+      if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
+        playerAudioCtx.resume().catch(() => { });
+      }
+      if (targetAudio.paused) {
+        const p = targetAudio.play();
+        if (p !== undefined) p.catch(e => console.log("Audio play error:", e));
+      } else {
+        targetAudio.pause();
+      }
+    };
+
+    if (btnPlay) btnPlay.onclick = toggleAudioPlay;
+    if (mainPlayBtn) mainPlayBtn.onclick = toggleAudioPlay;
+    if (albumClickable) albumClickable.onclick = toggleAudioPlay;
 
     if (btnRewind) {
       btnRewind.onclick = () => {
-        video.currentTime = Math.max(0, video.currentTime - 5);
+        targetAudio.currentTime = Math.max(0, targetAudio.currentTime - 5);
       };
     }
 
     if (btnForward) {
       btnForward.onclick = () => {
-        video.currentTime = Math.min(video.duration || 0, video.currentTime + 5);
+        targetAudio.currentTime = Math.min(targetAudio.duration || 0, targetAudio.currentTime + 5);
       };
     }
 
@@ -1356,13 +1363,21 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
       progressBar.onclick = (e) => {
         const rect = progressBar.getBoundingClientRect();
         const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        if (video.duration) {
-          video.currentTime = pct * video.duration;
+        if (targetAudio.duration) {
+          targetAudio.currentTime = pct * targetAudio.duration;
         }
       };
     }
 
-    setupAudioVisualizer(video, themeColors);
+    setupAudioVisualizer(targetAudio, themeColors);
+
+    // Initial play attempt on open
+    const p = targetAudio.play();
+    if (p !== undefined) {
+      p.then(() => updatePlayState()).catch(() => {
+        updatePlayState(); // Autoplay blocked -> displays pulsating "▶ TAP TO PLAY SONG" button!
+      });
+    }
 
   } else {
     // Video mode
