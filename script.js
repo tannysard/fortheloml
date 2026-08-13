@@ -1280,8 +1280,10 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
     playerAudioCtx.resume().catch(() => { });
   }
 
-  // Stop any currently playing media
-  if (video) { video.pause(); }
+  // Stop any currently playing media across the page
+  document.querySelectorAll("audio, video").forEach(el => {
+    try { el.pause(); } catch (err) { }
+  });
 
   if (isAudio) {
     if (videoView) videoView.style.display = "none";
@@ -1435,6 +1437,7 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
 function closeVideoPlayer() {
   const modal = document.getElementById("video-player-modal");
   const video = modal.querySelector("video");
+  const audioEl = document.getElementById("player-audio-element");
   const img = modal.querySelector("#player-img");
   const audioView = modal.querySelector("#player-audio-view");
   const videoView = modal.querySelector("#player-video-view");
@@ -1444,10 +1447,29 @@ function closeVideoPlayer() {
     visualizerAnimId = null;
   }
 
-  video.pause();
-  video.currentTime = 0;
-  video.src = "";
-  video.innerHTML = "";
+  // Pause and reset video element
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+    video.removeAttribute("src");
+    video.innerHTML = "";
+  }
+
+  // Pause and reset dedicated audio element
+  if (audioEl) {
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    audioEl.removeAttribute("src");
+    audioEl.innerHTML = "";
+  }
+
+  // Fail-safe: pause all audio and video elements on the page
+  document.querySelectorAll("audio, video").forEach(el => {
+    try {
+      el.pause();
+      el.currentTime = 0;
+    } catch (err) { }
+  });
 
   if (img) {
     img.src = "";
