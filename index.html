@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A personal streaming experience — made with love.">
+  <meta name="theme-color" content="#141414">
+  <title>Kuchu Puchu</title>
+
+  <!-- Favicon: red play button -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E50914'/><polygon points='35,20 80,50 35,80' fill='white'/></svg>">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Audio element for Netflix logo sound -->
+  <audio id="intro-audio" src="Netflix New Logo Animation 2019.mp3" preload="auto"></audio>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SCREEN 1 — INTRO ANIMATION
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div id="intro-screen" class="screen">
+    <canvas id="intro-canvas"></canvas>
+    <div class="intro-content">
+      <h1 class="intro-wordmark"></h1>
+    </div>
+    <span class="skip-intro-hint" id="intro-hint">tap anywhere to skip</span>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SCREEN 2 — PROFILE SELECT
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div id="profile-screen" class="screen">
+    <div class="profile-bg-glow"></div>
+    <div class="profile-top-bar">
+      <span class="profile-nav-logo">KUCHU PUCHU</span>
+    </div>
+    <div class="profile-container">
+      <h1 class="profile-heading">Who's watching?</h1>
+      <div class="profile-grid">
+        <!-- JS will inject profile tiles here -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SCREEN 3 — MAIN BROWSE INTERFACE
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div id="browse-screen" class="screen">
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="main-nav">
+      <div class="nav-left">
+        <span class="nav-logo"></span>
+      </div>
+      <div class="nav-right">
+        <div class="nav-profile" id="nav-profile-icon">
+          <!-- JS fills this with the selected profile's avatar/initial -->
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner" id="hero-banner">
+      <div class="hero-bg-image"></div>
+      <video class="hero-bg-video" autoplay muted loop playsinline></video>
+      <div class="hero-gradient-bottom"></div>
+      <div class="hero-gradient-left"></div>
+
+      <div class="hero-info">
+        <h1 class="hero-title"></h1>
+        <div class="hero-meta" id="hero-meta"></div>
+        <p class="hero-description"></p>
+        <div class="hero-buttons">
+          <button class="hero-play-btn" id="hero-play">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            Play
+          </button>
+          <button class="hero-info-btn" id="hero-info-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+              <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" />
+              <circle cx="12" cy="8" r="1" />
+            </svg>
+            More Info
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Side Badges (New Season & TOP 10) -->
+      <div class="hero-right-badges">
+        <div class="badge-pill badge-season">
+          <span class="badge-flag-icon">🚩</span>
+          <span class="badge-text">New Season</span>
+        </div>
+        <div class="badge-pill badge-top10">
+          <span class="top10-sq">TOP 10</span>
+          <span class="badge-text">No. 1 in the world</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Rows -->
+    <div class="content-rows-container" id="content-rows">
+      <!-- JS will inject content rows/carousels here -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Made with <span class="footer-heart">♥</span> just for you</p>
+    </footer>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SCREEN 4 — VIDEO PLAYER MODAL
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div class="video-player-modal" id="video-player-modal">
+    <div class="player-container">
+      <button class="player-close-btn" id="player-close" aria-label="Close player">✕</button>
+      
+      <!-- Video View -->
+      <div id="player-video-view" class="player-video-view">
+        <span class="player-title"></span>
+        <video controls playsinline></video>
+        <img id="player-img" alt="Media view" style="display:none; width:100%; height:100%; object-fit:contain;">
+      </div>
+
+      <!-- Music Visualizer View -->
+      <div id="player-audio-view" class="player-audio-view" style="display: none;">
+        <div class="audio-ambient-glow" id="audio-ambient-glow"></div>
+        <canvas id="player-visualizer-canvas" class="player-visualizer-canvas"></canvas>
+
+        <div class="audio-player-card">
+          <div class="album-art-container">
+            <img id="audio-album-art" alt="Album Art" src="">
+            <div class="vinyl-disc" id="vinyl-disc"></div>
+          </div>
+          <div class="audio-info">
+            <h2 class="audio-song-title" id="audio-song-title"></h2>
+            <p class="audio-song-desc" id="audio-song-desc"></p>
+          </div>
+
+          <!-- Progress Bar & Time -->
+          <div class="audio-progress-wrap" id="audio-progress-wrap">
+            <div class="audio-time-row">
+              <span id="audio-time-current">0:00</span>
+              <span id="audio-time-duration">0:00</span>
+            </div>
+            <div class="audio-progress-bar" id="audio-progress-bar">
+              <div class="audio-progress-fill" id="audio-progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Controls Row -->
+          <div class="audio-controls-row">
+            <button class="audio-ctrl-btn" id="audio-btn-rewind" title="Rewind 5s">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+            </button>
+            <button class="audio-ctrl-btn audio-play-btn" id="audio-btn-play" title="Play / Pause">
+              <svg id="audio-play-icon" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg>
+            </button>
+            <button class="audio-ctrl-btn" id="audio-btn-forward" title="Forward 5s">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6-8.5-6z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SCREEN 5 — ROMANTIC LOVE LETTER MODAL
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div class="letter-modal" id="letter-modal">
+    <div class="letter-overlay" id="letter-overlay"></div>
+    
+    <div class="letter-container">
+      <button class="letter-close-btn" id="letter-close-btn" aria-label="Close letter">✕</button>
+
+      <!-- Clean Header -->
+      <div class="letter-header">
+        <span class="letter-subtitle">FOR AADYA ❤️</span>
+        <h2 class="letter-title">A Letter From My Heart</h2>
+      </div>
+
+      <!-- Clean Body Content -->
+      <div class="letter-body">
+        <p class="letter-paragraph">
+          Ahhhhhhhh !!!!! I can't believe that I am getting the privilege to write this msg here. I used to think I would have to write something nonchalant taaki it wouldn't be obvious that I am mad in love with you. But since u gave me this very precious privilege, here is a short (hopefully) but yeah something i pour my heart into type of msg for my favv person.
+        </p>
+
+        <p class="letter-paragraph">
+          SO SO SO, HAAAPPPPIEESSSTTTTT BIRTHDDAAYYYYYYYY TO THE LOML ❤️❤️❤️❤️❤️, THE BEST THING THAT HAS HAPPENED TO ME, MY DREAM GIRL, THE GIRL WHO IS THE REASON I HAVE STARTED WAKING UP WITH A SMILING FACE AND SLEEPING WITH ONE TOO, MY PERSONAL MOTIVATION AND MY DUMBOOOOOOOOO GIRLFRIEND WHOM I AM MADDLLYYY IN LOVE WITH. AADYA, AADYA, AADYA....I MEAN THAT M.TECH CREEP GUY WASN'T WRONG THOUGH WHEN HE SAID THAT UR NAME IS VERY PRETTY. AAJ KAL TOH TIME IS BEING LITERALLY MAGICAL FOR ME AS IF THERE ARE MAGNETS IN MY BONES FOR THE IRON IN YOUR BLOOD. PEHLE BHALE HI IMPRESS KARNE KE LIYE BOLA HO BUT YEAH THIS TIME I MYSELF AM REALISING KI I AM BECOMING A EVEN BETTER PERSON CUZ OF MY BETTER HALF THAT IS YOU 🥰. LET ME TELL U THAT CURRENTLY IT IS 1.47 AM AND I AM ON THE TERRACE WRITING THIS CUZ OFC MERE ROOMATES KE SAAMNE I CANNOT WRITE THIS AND UNUSUALLY THE MOON IS STILL VISIBLE BUT THATS NOT THE REAL MOON, THE REAL MOON IS READING THIS NOTE HER BF MADE FOR HER.
+        </p>
+
+        <p class="letter-paragraph">
+          AADYAAAA!!!! U ARE SUCH AN AMAZINGGGGG PERSON YAAR !!! BHONDU, INTELLIGENT, PHATTU AND SOOOO LOVING, I MEAN WHAT ELSE CAN SOMEONE HAVE TO BECOME A PERFECT 10/10 BADDIE. YOU ARE DEFFFFF MY TYPE AND TRUST ME MEIN ABHI RAAT BHAR CHAAND SE TERI TAAREEF KRUNGA AND I BET CHAND ITNA JALEGA KI KUCH TIME BAAD SURAJ BAN JAAYEGA.
+        </p>
+
+        <p class="letter-paragraph">
+          UKW AADYA U ARE MY SAFE SPACE, MY PRIDE, MY EVERYTHING ! YOU ARE SOMEONE WHO I HAVE YEARNED FOR SO MUCH IN FRONT OF GOD AND I FEEL SOOO GRATEFUL AND LUCKY TO HAVE YOU IN MY LIFE. I MEAN IT IS TRUE NA YAAR, WHAT WILL I HAVE IF I LOSE YOU AND WHAT WILL I LOSE IF I HAVE YOU ?! I HOPE THE EFFORTS THAT I AM TAKING FOR U ARE GENUINELY MAKING YOU HAPPY CUZ I WANT TO LOVE YOU YOUR WAY, NOT IN A RUSHED WAY. I WANT TO LEARN YOU. LEARN IN SUCH A WAY THAT IF WE BOTH WERE WORDS THEN YOU WOULD BE MY MEANING. AND AND AND AND ARE WE GONNA TALK ABOUT THAT HOLDING HANDS OF OURS. YOUR SOFT HANDS FELT SOOOO MUCHHHH HOME. I HOPE I HAVE THE PRIVILEGE TO HOLD THAT HAND IN ALL THE MOMENTS OF LIFE WE FACE. NO MATTER HOW DARK THE STORMS ARE OR HOW HARD THE TIME IS I WANT US TO BE THOSE TANMAY AND AADYA WHO SNEAK OUT SECRETLY AFTER CLG GETS OVER AND WAIT AT THE BUS STOP OR METRO STATION PRAYING NOBODY SEES US FROM CLG. THAT VERSION WHO ARE MADE OF NOTHING BUT LOVE AND BIG DREAMS AND THE HUNGER TO ACHIEVE THEM ALL SO THAT ONE DAY THOSE SAME SOFT HANDS IN MY HANDS AND I WILL BE ABLE TO SAY WE MADE IT. TALKING ABOUT EFFORTS , YEAH I WILL DO 50/50. BUT I'LL ALSO DO THE 60/40 OR THE 70/30 OR THE 80/20 OR THE 90/10. AND I'LL EVEN DO THE 100 % WHEN U ARE ON YOUR 0%. CUZ IT JUST ISNT ABOUT YOU, ITS ALSO ABOUT THE PROMISE I MADE WITH GOD AND LIFE THAT GIVE ME EVERY POSSIBLE SETBACK & I WILL SHOW U HOW STRONG MY LOVE FOR YOU IS.
+        </p>
+
+        <p class="letter-paragraph">
+          AADYA, IF EVEN SOMEDAY WE HAVE TO MOVE OTHER CITIES I HOPE WHEN MY ARMS CANT HOLD U MY PRAYERS DO. I PROMISE TO SIT WITH YOU IN THE DARK WHEN U CANT FIND THE LIGHT CUZ THATS WHAT'S TRUE IS RIGHT ?? STAYING FOR EACH OTHER WHEN IT ISNT BUTTERFLIES OR MEETING EVERYDAY OR WHAT NOT. I WANT YOU TO FEEL MY LOVE FOR YOU AND KNOW THE FACT THAT U WILL ALWAYS BE THE BETTER PART OF ME A PART I CHERISH AND AM GRATEFUL TO HAVE EVERYDAY. LET THIS LOVE OF MINE BE THE MIRROR FOR YOU WHEN U NEED IT THE MOST, LET IT GIVE YOU CONFIDENCE THAT WHEN THE PATHS ARE COMPLICATED THERE IS SOMEONE WHO IS PROUD OF YOU FOR WHATEVER YOU ARE DOING AND NO MATTER WHAT HAPPENS IS NEVER GONNA GIVE UP ON YOU CUZ BUTTERFLIES CANT SEE THEIR OWN WINGS BUT EVERYONE ADORES THEM, SIMILARLY WHEN I SAY GOOD ABOUT YOU OR TELL U MY HEART'S THING REMEMBER THE FACT THAT I AM PRAISING THE WINGS OF MY FAVOURITE BUTTERFLY. AAKHON SE DUR BHI JAAO PAR MERE ISS DIL SE KAHA HI JAAOGE...
+        </p>
+
+        <p class="letter-paragraph">
+          CHODHO YAAR YEH SERIOUS BAATEIN, I WANT YOU TO HAVE A BASH TODAY (VERY HAPPY THAT MP KA TA GOT POSTPONED), JUST REMEMBER THAT I AM THERE FOR YOU. YOU CAN SPAM ME WITH UR RANDOM THOUGHTS OR ANNOY ME WHEN U WANT, OR DO WHATEVER YOU WANT WITH ME CUZ I WANT YOU TO FEEL ME AS YOUR PERSON AND ONLY YOUR PERSON CUZ I WOULD SRSLY LOVE THAT TBVH. BUT UKW, ACCHA HUA YAAR SUNDAR HONE KA BILL NHI AATA WARNA TUM TOH KARJE MEIN DUB JAATE CUTE AND YEAH I AM SORRY IF THIS MSG ISNT ITNA GOATED CUZ THIS MP TAQ AND NM KA TA IS TESTING ME TO MY MAX. HOW DO I EVEN EXPLAIN THIS CLG MAN, MAI KITNA BHI PADHU, YAAD TOH MUJHE BAS TU HI REHTI HAI.
+        </p>
+
+        <p class="letter-paragraph">
+          IN THE END AADYA, I WILL SAY THAT CHEERS TO 19, HAVE A BASHHH AND ENJOYYY YOUR DAY CUZ ITS YOUR DAY (PAKISTAN KA INDEPENDENCE DAY). AND THANKS MAN FOR CHANGING MY LIFE, I MEAN THE PERSON JO 10+ HRS SOTA THA ABHI 3-4 HRS KE NEEND MEIN BHI GRIND KR LETA HAAIN IF IT MEANS I GET TO GROUP STUDY WITH YOU AT 4 AM IN THE MORNING.
+        </p>
+
+        <p class="letter-paragraph">
+          TO WRAP UP THIS NOTE I WILL SAY.....
+        </p>
+
+        <blockquote class="letter-quote">
+          "TUM CHAND HO YAAR TUM MERE BAGHAIR BHI CHAMKOGE, MAI AASMAAN HU JO TUMHAARE BAGAIR BILKUL TANHA HAAIN CUZ PREM HONA TOH BHAGYA HAAIN PAR TUMSE HONA TOH SAUBHAAGYA HAAIN."
+        </blockquote>
+
+        <div class="letter-closing">
+          <p class="closing-love">LOVE SO SOOO MUCHH YAAR....ENJOY !!!! ❤️</p>
+          <p class="closing-signature">Forever Yours,<br><strong>Tanmay</strong></p>
+        </div>
+      </div>
+
+      <!-- Letter Footer -->
+      <div class="letter-footer">
+        <button class="letter-action-btn" id="letter-done-btn">Close Letter ❤️</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Base64 Embedded Netflix Audio Data -->
+  <script src="audio_data.js"></script>
+  <!-- Main script — all your editable content data is at the top of this file -->
+  <script src="script.js"></script>
+</body>
+
+</html>
