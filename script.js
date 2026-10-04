@@ -1,47 +1,13 @@
-/* ═══════════════════════════════════════════════════════════════════════════
- *  ██╗  ██╗██╗   ██╗ ██████╗██╗  ██╗██╗   ██╗    ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██╗   ██╗
- *  ██║ ██╔╝██║   ██║██╔════╝██║  ██║██║   ██║    ██╔══██╗██║   ██║██╔════╝██║  ██║██║   ██║
- *  █████╔╝ ██║   ██║██║     ███████║██║   ██║    ██████╔╝██║   ██║██║     ███████║██║   ██║
- *  ██╔═██╗ ██║   ██║██║     ██╔══██║██║   ██║    ██╔═══╝ ██║   ██║██║     ██╔══██║██║   ██║
- *  ██║  ██╗╚██████╔╝╚██████╗██║  ██║╚██████╔╝    ██║     ╚██████╔╝╚██████╗██║  ██║╚██████╔╝
- *  ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝ ╚═════╝     ╚═╝      ╚═════╝  ╚═════╝╚═╝  ╚═╝ ╚═════╝
- *
- *  🎬  YOUR PERSONAL STREAMING APP  🎬
- *
- *  HOW TO USE THIS FILE:
- *  ─────────────────────
- *  All the stuff you need to customize is RIGHT HERE at the top.
- *  You do NOT need to scroll past the "DO NOT EDIT BELOW THIS LINE" marker.
- *
- *  1. Change the intro text, profile names, avatars  → Section A
- *  2. Change the hero banner                         → Section B
- *  3. Add your videos & thumbnails to the rows       → Section C
- *
- *  For videos:  Drop .mp4 files into the /videos/ folder
- *  For thumbs:  Drop images into the /thumbnails/ folder
- *
- * ═══════════════════════════════════════════════════════════════════════════ */
 
 
-/* ┌─────────────────────────────────────────────────────────────────────────┐
- * │  SECTION A — INTRO TEXT & PROFILE SETTINGS                             │
- * │                                                                        │
- * │  introText   → The big text that appears in the opening animation.     │
- * │  AUDIO_SRC   → Set to null to use the built-in synthesized sound.      │
- * │               Set to a file path (e.g. "sounds/tudum.mp3") to use      │
- * │               your own audio file instead.                             │
- * │  profiles    → The two profile tiles on the "Who's watching?" screen.  │
- * │               Change the name and avatar for each.                     │
- * │               For avatar: drop an image in /thumbnails/ and set the    │
- * │               path here, e.g. "thumbnails/my_photo.jpg"                │
- * │               Leave avatar as null to show initials instead.           │
- * └─────────────────────────────────────────────────────────────────────────┘ */
+
+
 
 const introText = "KUCHU PUCHU";
 
-// OPTIONAL: replace the synthesized sound with your own audio file:
-// Set this to a file path like "sounds/tudum.mp3" or leave as null
-// to use the auto-generated Web Audio API sound.
+
+
+
 const AUDIO_SRC = "media/audio/tudum.mp3";
 
 const profiles = [
@@ -58,53 +24,28 @@ const profiles = [
 ];
 
 
-/* ┌─────────────────────────────────────────────────────────────────────────┐
- * │  SECTION B — HERO BANNER (the big featured banner at the top)          │
- * │                                                                        │
- * │  title       → The big title text on the banner.                       │
- * │  description → A short description/tagline underneath.                 │
- * │  bgImage     → Background image for the banner. Drop an image in      │
- * │                /thumbnails/ and set the path here.                     │
- * │                e.g. "thumbnails/hero_bg.jpg"                           │
- * │  bgVideo     → (Optional) Background VIDEO for the banner instead.    │
- * │                Set to a .mp4 path to play a looping clip behind the   │
- * │                title. Set to null to use the image instead.            │
- * │  videoSrc    → The video that plays when you click "Play" on the hero.│
- * │                e.g. "videos/our_best_moment.mp4"                       │
- * └─────────────────────────────────────────────────────────────────────────┘ */
+
 
 const heroContent = {
   title: "HAPPIESTT BIRTHDAYY AADYAAA ❤️",
   meta: "Romance • 2026 • Forever • TV-LOVE",
   description: "Made this website for my special person's birthday cuz apna relationship mein aane ka process was not less than a movie 😙❤️",
-  bgImage: "media/thumbnails/profile/hero_bg.jpg",         // ← Main screen background image
-  bgPosition: "center",                       // ← Centered positioning for 16:9 hero background
-  bgVideo: null,         // ← e.g. "videos/hero_loop.mp4"  (or null for static image)
-  videoSrc: null         // ← e.g. "videos/featured_video.mp4"
+  bgImage: "media/thumbnails/profile/hero_bg.jpg",         
+  bgPosition: "center",                       
+  bgVideo: null,         
+  videoSrc: null         
 };
 
 
-/* ┌─────────────────────────────────────────────────────────────────────────┐
- * │  SECTION C — CONTENT ROWS (the horizontally-scrolling carousels)       │
- * │                                                                        │
- * │  There are 7 rows below, each with a category name and a list of      │
- * │  video cards. Each card has:                                           │
- * │                                                                        │
- * │    title     → The title shown on hover                               │
- * │    thumbnail → Path to thumbnail image, e.g. "thumbnails/pic1.jpg"    │
- * │                Leave as null for a gray placeholder                   │
- * │    videoSrc  → Path to the video file, e.g. "videos/clip1.mp4"        │
- * │                Leave as null if you haven't added the video yet        │
- * │    description → (Optional) Short text shown in the info overlay       │
- * └─────────────────────────────────────────────────────────────────────────┘ */
+
 
 const CONTENT_DATA = [
 
-  // ── ROW 1 (Our Pictures) ────────────────────────────────────────────────
+  
   {
-    category: "Our Pictures",        // ← Main category
-    isBeta: true,                     // ← Renders the pink/red BETA badge next to header
-    isRoundedCards: true,             // ← Renders rounded rectangle cards (Games UI style)
+    category: "Our Pictures",        
+    isBeta: true,                     
+    isRoundedCards: true,             
     items: [
       {
         title: "Ice Cream",
@@ -163,7 +104,7 @@ const CONTENT_DATA = [
     ]
   },
 
-  // ── ROW 2 (Song lyrics that remind me of you.) ────────────────────────────
+  
   {
     category: "Song lyrics that remind me of you. (tried sab arjit ke rhkne ke liye)",
     isRoundedCards: true,
@@ -244,7 +185,7 @@ const CONTENT_DATA = [
     ]
   },
 
-  // ── ROW 3 (Places i wanna visit with u) ──────────────────────────────────
+  
   {
     category: "Places i wanna visit with u",
     isRoundedCards: true,
@@ -306,7 +247,7 @@ const CONTENT_DATA = [
     ]
   },
 
-  // ── ROW 4 (Reels i want to recreate with u.) ──────────────────────────────
+  
   {
     category: "Reels i want to recreate with u.",
     isRoundedCards: true,
@@ -352,23 +293,16 @@ const CONTENT_DATA = [
 ];
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  ┌──────────────────────────────────────────────────────────────────────┐
- *  │            ⛔  DO NOT EDIT BELOW THIS LINE  ⛔                       │
- *  │                                                                      │
- *  │  Everything below is layout/animation/interaction code.              │
- *  │  You only need to edit the sections above (A, B, C) to customize.   │
- *  └──────────────────────────────────────────────────────────────────────┘
- * ═══════════════════════════════════════════════════════════════════════════ */
 
 
-// ── State ────────────────────────────────────────────────────────────────
-let currentScreen = "intro"; // intro | profiles | browse
+
+
+let currentScreen = "intro"; 
 let audioCtx = null;
 let introAnimationDone = false;
 let selectedProfile = null;
 
-// ── DOM Ready ────────────────────────────────────────────────────────────
+
 document.addEventListener("DOMContentLoaded", () => {
   buildIntroScreen();
   buildProfileScreen();
@@ -376,14 +310,12 @@ document.addEventListener("DOMContentLoaded", () => {
   buildVideoPlayer();
   buildLetterModal();
 
-  // Start with intro
+  
   showScreen("intro");
 });
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN 1 — INTRO ANIMATION
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 let introAudio = null;
 let soundPlayed = false;
@@ -391,7 +323,7 @@ let autoAdvanceTimer = null;
 let webAudioCtx = null;
 let introSequenceStarted = false;
 
-// Web Audio API Procedural Synthesizer for Netflix Tudum sound
+
 function playSynthesizedTudum() {
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -404,7 +336,7 @@ function playSynthesizedTudum() {
     const ctx = webAudioCtx;
     const now = ctx.currentTime;
 
-    // 1. "Tu" (First Thud at t=0s)
+    
     const osc1 = ctx.createOscillator();
     const gain1 = ctx.createGain();
     osc1.type = 'sine';
@@ -417,7 +349,7 @@ function playSynthesizedTudum() {
     osc1.start(now);
     osc1.stop(now + 0.25);
 
-    // 2. "Dum" (Second Deep Thud at t=0.22s)
+    
     const osc2 = ctx.createOscillator();
     const gain2 = ctx.createGain();
     osc2.type = 'triangle';
@@ -430,7 +362,7 @@ function playSynthesizedTudum() {
     osc2.start(now + 0.22);
     osc2.stop(now + 0.7);
 
-    // 3. Metallic/Chime Swell (fading from t=0.3s to 2.8s)
+    
     const freqs = [293.66, 370.00, 440.00, 554.37];
     freqs.forEach(freq => {
       const osc = ctx.createOscillator();
@@ -524,7 +456,7 @@ function buildIntroScreen() {
   introAnimationDone = false;
   soundPlayed = false;
 
-  // Pre-load audio buffer in background for 0ms Web Audio playback
+  
   loadAudioBuffer();
 
   function triggerSoundAndAnimation() {
@@ -533,7 +465,7 @@ function buildIntroScreen() {
 
     if (hint) hint.style.display = "none";
 
-    // Play Audio (either Web Audio API decoded buffer, HTML5 Audio element, or synth)
+    
     let played = false;
     if (webAudioCtx && audioBuffer) {
       try {
@@ -560,17 +492,17 @@ function buildIntroScreen() {
       });
     }
 
-    // Wordmark zoom animation
+    
     if (wordmark) {
       wordmark.classList.remove("ready", "animate");
-      void wordmark.offsetWidth; // force CSS reflow
+      void wordmark.offsetWidth; 
       wordmark.classList.add("animate");
     }
 
-    // Canvas spectrum animation
+    
     startSpectrumCanvas();
 
-    // Auto-advance to profiles after 3.6s
+    
     if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
     autoAdvanceTimer = setTimeout(() => {
       if (currentScreen === "intro") {
@@ -579,12 +511,12 @@ function buildIntroScreen() {
     }, 3600);
   }
 
-  // 1. Try immediate autoplay on page load/reload
+  
   playIntroSound().then(() => {
-    // Autoplay allowed by browser! Start sound + animation
+    
     triggerSoundAndAnimation();
   }).catch(() => {
-    // Autoplay blocked by browser policy -> Display glowing title & wait for click/tap
+    
     if (wordmark) wordmark.classList.add("ready");
     if (hint) {
       hint.textContent = "tap anywhere to start";
@@ -592,7 +524,7 @@ function buildIntroScreen() {
     }
   });
 
-  // 2. Click, tap, or keypress anywhere triggers sound & animation in sync
+  
   const handleUserClick = (e) => {
     if (!introSequenceStarted) {
       if (e) e.stopPropagation();
@@ -607,7 +539,7 @@ function buildIntroScreen() {
   window.addEventListener("touchstart", handleUserClick, { once: true });
 }
 
-/* ── Canvas Spectrum Light Ribbon Animation (60FPS GPU Optimized) ──────── */
+
 function startSpectrumCanvas() {
   const canvas = document.getElementById("intro-canvas");
   if (!canvas) return;
@@ -623,20 +555,20 @@ function startSpectrumCanvas() {
   resize();
   window.addEventListener("resize", resize);
 
-  // Netflix spectrum palette: rich vibrant light streams
+  
   const palette = [
-    "rgba(229, 9, 20, ",    // Crimson Red
-    "rgba(255, 30, 39, ",   // Bright Red
-    "rgba(232, 17, 127, ",  // Hot Pink / Magenta
-    "rgba(155, 17, 232, ",  // Purple
-    "rgba(65, 17, 232, ",   // Deep Blue
-    "rgba(0, 200, 255, ",   // Cyan
-    "rgba(255, 180, 0, ",   // Gold / Orange
-    "rgba(255, 85, 0, ",    // Orange-Red
-    "rgba(255, 45, 85, "    // Neon Rose
+    "rgba(229, 9, 20, ",    
+    "rgba(255, 30, 39, ",   
+    "rgba(232, 17, 127, ",  
+    "rgba(155, 17, 232, ",  
+    "rgba(65, 17, 232, ",   
+    "rgba(0, 200, 255, ",   
+    "rgba(255, 180, 0, ",   
+    "rgba(255, 85, 0, ",    
+    "rgba(255, 45, 85, "    
   ];
 
-  // 90 vertical ribbon light lines
+  
   const ribbons = [];
   const ribbonCount = 95;
   for (let i = 0; i < ribbonCount; i++) {
@@ -660,11 +592,11 @@ function startSpectrumCanvas() {
     const cx = w / 2;
     const cy = h / 2;
 
-    // Pitch black background clear
+    
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, w, h);
 
-    // Phase 1 (0s - 1.2s): Central red stem vertical bar grow
+    
     if (elapsed < 1.3) {
       const stemProgress = Math.min(elapsed / 0.7, 1);
       const stemH = h * 0.45 * stemProgress;
@@ -674,7 +606,7 @@ function startSpectrumCanvas() {
       ctx.fillRect(cx - stemW / 2, cy - stemH / 2, stemW, stemH);
     }
 
-    // Phase 2 (0.9s - 3.4s): GPU "lighter" blending spectrum lines expansion
+    
     if (elapsed > 0.8 && elapsed < 3.5) {
       const burstTime = elapsed - 0.8;
       ctx.globalCompositeOperation = "lighter";
@@ -738,9 +670,7 @@ function transitionFromIntro() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN 2 — PROFILE SELECT
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 function buildProfileScreen() {
   const grid = document.querySelector(".profile-grid");
@@ -753,7 +683,7 @@ function buildProfileScreen() {
     tile.setAttribute("role", "button");
     tile.setAttribute("aria-label", `Select profile: ${profile.name}`);
 
-    // Avatar
+    
     const avatarWrap = document.createElement("div");
     avatarWrap.className = "profile-avatar";
 
@@ -764,7 +694,7 @@ function buildProfileScreen() {
       img.loading = "lazy";
       avatarWrap.appendChild(img);
     } else {
-      // Colored initial fallback
+      
       avatarWrap.style.backgroundColor = profile.color || "#333";
       const initial = document.createElement("span");
       initial.className = "profile-initial";
@@ -772,7 +702,7 @@ function buildProfileScreen() {
       avatarWrap.appendChild(initial);
     }
 
-    // Name
+    
     const nameEl = document.createElement("span");
     nameEl.className = "profile-name";
     nameEl.textContent = profile.name;
@@ -800,7 +730,7 @@ function buildProfileScreen() {
 function transitionToPlayer(profile) {
   const profileScreen = document.getElementById("profile-screen");
   profileScreen.classList.add("fade-out");
-  // Update profile icon in nav
+  
   const navProfile = document.querySelector(".nav-profile");
   if (profile.avatar) {
     navProfile.innerHTML = `<img src="${profile.avatar}" alt="${profile.name}">`;
@@ -814,21 +744,19 @@ function transitionToPlayer(profile) {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN 3 — MAIN BROWSE INTERFACE
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 function buildBrowseScreen() {
-  // Set wordmark in nav
+  
   document.querySelector(".nav-logo").textContent = introText;
 
-  // Build hero
+  
   buildHero();
 
-  // Build content rows
+  
   buildContentRows();
 
-  // Nav scroll behavior: transparent → solid
+  
   window.addEventListener("scroll", () => {
     const nav = document.querySelector(".main-nav");
     if (!nav) return;
@@ -866,7 +794,7 @@ function buildHero() {
     heroBgVideo.style.display = "none";
   }
 
-  // Play button opens love letter modal
+  
   const playBtn = hero.querySelector(".hero-play-btn");
   if (playBtn) {
     playBtn.addEventListener("click", () => {
@@ -874,7 +802,7 @@ function buildHero() {
     });
   }
 
-  // More Info button also opens love letter modal
+  
   const infoBtn = hero.querySelector(".hero-info-btn") || hero.querySelector("#hero-info-btn");
   if (infoBtn) {
     infoBtn.addEventListener("click", () => {
@@ -891,7 +819,7 @@ function buildContentRows() {
     const section = document.createElement("section");
     section.className = "content-row";
 
-    // Category header with optional BETA badge
+    
     const header = document.createElement("div");
     header.className = "row-header";
     const titleWrap = document.createElement("div");
@@ -910,7 +838,7 @@ function buildContentRows() {
 
     header.appendChild(titleWrap);
 
-    // Carousel wrapper
+    
     const carouselWrap = document.createElement("div");
     carouselWrap.className = "carousel-wrap";
 
@@ -927,7 +855,7 @@ function buildContentRows() {
     const slider = document.createElement("div");
     slider.className = "carousel-slider";
 
-    // Build cards
+    
     row.items.forEach((item, itemIdx) => {
       const card = document.createElement("div");
       card.className = row.isRoundedCards ? "title-card card-rounded" : "title-card";
@@ -935,7 +863,7 @@ function buildContentRows() {
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", item.title);
 
-      // Thumbnail area
+      
       const thumbWrap = document.createElement("div");
       thumbWrap.className = "card-thumb";
 
@@ -965,7 +893,7 @@ function buildContentRows() {
         vid.style.objectFit = "cover";
         thumbWrap.appendChild(vid);
       } else {
-        // Gray placeholder
+        
         const placeholder = document.createElement("div");
         placeholder.className = "card-placeholder";
         const phIcon = document.createElement("div");
@@ -978,7 +906,7 @@ function buildContentRows() {
         thumbWrap.appendChild(placeholder);
       }
 
-      // Hover info overlay
+      
       const overlay = document.createElement("div");
       overlay.className = "card-overlay";
 
@@ -1003,7 +931,7 @@ function buildContentRows() {
       card.appendChild(thumbWrap);
       card.appendChild(overlay);
 
-      // Click handler for video or photo lightbox
+      
       const openMedia = () => {
         if (item.videoSrc) {
           openVideoPlayer(item.videoSrc, item.title, item.thumbnail, item.description, item.themeColors);
@@ -1023,7 +951,7 @@ function buildContentRows() {
       slider.appendChild(card);
     });
 
-    // Arrow click handlers
+    
     arrowLeft.addEventListener("click", () => {
       slider.scrollBy({ left: -slider.clientWidth * 0.75, behavior: "smooth" });
     });
@@ -1042,9 +970,7 @@ function buildContentRows() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN 4 — MEDIA PLAYER / LIGHTBOX
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 function buildVideoPlayer() {
   const modal = document.getElementById("video-player-modal");
@@ -1054,14 +980,14 @@ function buildVideoPlayer() {
     closeVideoPlayer();
   });
 
-  // Close on Escape
+  
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeVideoPlayer();
     }
   });
 
-  // Close when clicking the backdrop
+  
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       closeVideoPlayer();
@@ -1205,7 +1131,7 @@ function setupAudioVisualizer(mediaEl, themeColors) {
       glowEl.style.transform = `scale(${pulseScale})`;
     }
 
-    // 1. Draw floating ambient particles
+    
     for (let p of particles) {
       p.y -= p.speedY * (1 + (avgFreq / 255) * 0.8);
       p.x += p.speedX;
@@ -1221,7 +1147,7 @@ function setupAudioVisualizer(mediaEl, themeColors) {
       ctx.globalAlpha = 1;
     }
 
-    // 2. Draw real-time frequency spectrum bars along bottom
+    
     const barWidth = (w / bufferLength) * 1.6;
     let x = 0;
 
@@ -1242,7 +1168,7 @@ function setupAudioVisualizer(mediaEl, themeColors) {
       x += barWidth;
     }
 
-    // 3. Smooth Bezier Waveform Line
+    
     ctx.beginPath();
     ctx.moveTo(0, h * 0.82);
     for (let i = 0; i < bufferLength; i++) {
@@ -1275,12 +1201,12 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
 
   const isAudio = /\.(mp3|opus|wav|m4a|aac|ogg)$/i.test(src);
 
-  // Resume Web Audio Context if initialized
+  
   if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
     playerAudioCtx.resume().catch(() => { });
   }
 
-  // Stop any currently playing media across the page
+  
   document.querySelectorAll("audio, video").forEach(el => {
     try { el.pause(); } catch (err) { }
   });
@@ -1387,16 +1313,16 @@ function openVideoPlayer(src, title, posterImg, description, themeColors) {
 
     setupAudioVisualizer(targetAudio, themeColors);
 
-    // Initial play attempt on open
+    
     const p = targetAudio.play();
     if (p !== undefined) {
       p.then(() => updatePlayState()).catch(() => {
-        updatePlayState(); // Autoplay blocked -> displays pulsating "▶ TAP TO PLAY SONG" button!
+        updatePlayState(); 
       });
     }
 
   } else {
-    // Video mode
+    
     if (audioView) audioView.style.display = "none";
     if (videoView) {
       videoView.style.display = "block";
@@ -1447,7 +1373,7 @@ function closeVideoPlayer() {
     visualizerAnimId = null;
   }
 
-  // Pause and reset video element
+  
   if (video) {
     video.pause();
     video.currentTime = 0;
@@ -1455,7 +1381,7 @@ function closeVideoPlayer() {
     video.innerHTML = "";
   }
 
-  // Pause and reset dedicated audio element
+  
   if (audioEl) {
     audioEl.pause();
     audioEl.currentTime = 0;
@@ -1463,7 +1389,7 @@ function closeVideoPlayer() {
     audioEl.innerHTML = "";
   }
 
-  // Fail-safe: pause all audio and video elements on the page
+  
   document.querySelectorAll("audio, video").forEach(el => {
     try {
       el.pause();
@@ -1489,9 +1415,7 @@ function closeVideoPlayer() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN MANAGEMENT
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 function showScreen(screenName) {
   currentScreen = screenName;
@@ -1504,21 +1428,19 @@ function showScreen(screenName) {
   const target = document.getElementById(screenName === "intro" ? "intro-screen" :
     screenName === "profiles" ? "profile-screen" :
       "browse-screen");
-  // Small delay to allow CSS transition
+  
   requestAnimationFrame(() => {
     target.classList.add("active");
   });
 
-  // Reset scroll for browse screen
+  
   if (screenName === "browse") {
     window.scrollTo(0, 0);
   }
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
- *  SCREEN 5 — ROMANTIC LOVE LETTER MODAL LOGIC
- * ═══════════════════════════════════════════════════════════════════════════ */
+
 
 let letterStarsAnimId = null;
 
@@ -1540,7 +1462,7 @@ function buildLetterModal() {
     overlay.addEventListener("click", closeLetterModal);
   }
 
-  // Close on Escape key
+  
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeLetterModal();
@@ -1555,7 +1477,7 @@ function openLetterModal() {
   modal.classList.add("active");
   document.body.classList.add("no-scroll");
 
-  // Reset scroll position to top
+  
   const letterBody = modal.querySelector(".letter-body");
   if (letterBody) letterBody.scrollTop = 0;
 }

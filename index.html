@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#141414">
   <title>Kuchu Puchu</title>
 
-  <!-- Favicon: red play button -->
+  
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E50914'/><polygon points='35,20 80,50 35,80' fill='white'/></svg>">
 
@@ -17,12 +17,10 @@
 
 <body>
 
-  <!-- Audio element for Netflix logo sound -->
+  
   <audio id="intro-audio" src="Netflix New Logo Animation 2019.mp3" preload="auto"></audio>
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       SCREEN 1 — INTRO ANIMATION
-       ═══════════════════════════════════════════════════════════════════ -->
+  
   <div id="intro-screen" class="screen">
     <canvas id="intro-canvas"></canvas>
     <div class="intro-content">
@@ -32,9 +30,7 @@
   </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       SCREEN 2 — PROFILE SELECT
-       ═══════════════════════════════════════════════════════════════════ -->
+  
   <div id="profile-screen" class="screen">
     <div class="profile-bg-glow"></div>
     <div class="profile-top-bar">
@@ -43,30 +39,28 @@
     <div class="profile-container">
       <h1 class="profile-heading">Who's watching?</h1>
       <div class="profile-grid">
-        <!-- JS will inject profile tiles here -->
+        
       </div>
     </div>
   </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       SCREEN 3 — MAIN BROWSE INTERFACE
-       ═══════════════════════════════════════════════════════════════════ -->
+  
   <div id="browse-screen" class="screen">
 
-    <!-- Navigation -->
+    
     <nav class="main-nav" id="main-nav">
       <div class="nav-left">
         <span class="nav-logo"></span>
       </div>
       <div class="nav-right">
         <div class="nav-profile" id="nav-profile-icon">
-          <!-- JS fills this with the selected profile's avatar/initial -->
+          
         </div>
       </div>
     </nav>
 
-    <!-- Hero Banner -->
+    
     <div class="hero-banner" id="hero-banner">
       <div class="hero-bg-image"></div>
       <video class="hero-bg-video" autoplay muted loop playsinline></video>
@@ -95,7 +89,7 @@
         </div>
       </div>
 
-      <!-- Right Side Badges (New Season & TOP 10) -->
+      
       <div class="hero-right-badges">
         <div class="badge-pill badge-season">
           <span class="badge-flag-icon">🚩</span>
@@ -108,38 +102,36 @@
       </div>
     </div>
 
-    <!-- Content Rows -->
+    
     <div class="content-rows-container" id="content-rows">
-      <!-- JS will inject content rows/carousels here -->
+      
     </div>
 
-    <!-- Footer -->
+    
     <footer class="site-footer">
       <p>Made with <span class="footer-heart">♥</span> just for you</p>
     </footer>
   </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       SCREEN 4 — VIDEO PLAYER MODAL
-       ═══════════════════════════════════════════════════════════════════ -->
+  
   <div class="video-player-modal" id="video-player-modal">
     <div class="player-container">
       <button class="player-close-btn" id="player-close" aria-label="Close player">✕</button>
       
-      <!-- Video View -->
+      
       <div id="player-video-view" class="player-video-view">
         <span class="player-title"></span>
         <video controls playsinline></video>
         <img id="player-img" alt="Media view" style="display:none; width:100%; height:100%; object-fit:contain;">
       </div>
 
-      <!-- Music Visualizer View -->
+      
       <div id="player-audio-view" class="player-audio-view" style="display: none;">
         <div class="audio-ambient-glow" id="audio-ambient-glow"></div>
         <canvas id="player-visualizer-canvas" class="player-visualizer-canvas"></canvas>
 
-        <!-- Dedicated Audio Element for Music Playback -->
+        
         <audio id="player-audio-element" preload="metadata"></audio>
 
         <div class="audio-player-card">
@@ -152,13 +144,13 @@
             <p class="audio-song-desc" id="audio-song-desc"></p>
           </div>
 
-          <!-- Prominent Play Button for Guaranteed User Gesture Playback -->
+          
           <button class="audio-main-play-btn" id="audio-main-play-btn">
             <span class="play-btn-icon" id="audio-main-play-icon">▶</span>
             <span class="play-btn-text" id="audio-play-btn-label">PLAY SONG</span>
           </button>
 
-          <!-- Progress Bar & Time -->
+          
           <div class="audio-progress-wrap" id="audio-progress-wrap">
             <div class="audio-time-row">
               <span id="audio-time-current">0:00</span>
@@ -169,7 +161,7 @@
             </div>
           </div>
 
-          <!-- Controls Row -->
+          
           <div class="audio-controls-row">
             <button class="audio-ctrl-btn" id="audio-btn-rewind" title="Rewind 5s">
               <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
@@ -188,22 +180,20 @@
   </div>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       SCREEN 5 — ROMANTIC LOVE LETTER MODAL
-       ═══════════════════════════════════════════════════════════════════ -->
+  
   <div class="letter-modal" id="letter-modal">
     <div class="letter-overlay" id="letter-overlay"></div>
     
     <div class="letter-container">
       <button class="letter-close-btn" id="letter-close-btn" aria-label="Close letter">✕</button>
 
-      <!-- Clean Header -->
+      
       <div class="letter-header">
         <span class="letter-subtitle">FOR AADYA ❤️</span>
         <h2 class="letter-title">A Letter From My Heart</h2>
       </div>
 
-      <!-- Clean Body Content -->
+      
       <div class="letter-body">
         <p class="letter-paragraph">
           Ahhhhhhhh !!!!! I can't believe that I am getting the privilege to write this msg here. I used to think I would have to write something nonchalant taaki it wouldn't be obvious that I am mad in love with you. But since u gave me this very precious privilege, here is a short (hopefully) but yeah something i pour my heart into type of msg for my favv person.
@@ -247,7 +237,7 @@
         </div>
       </div>
 
-      <!-- Letter Footer -->
+      
       <div class="letter-footer">
         <button class="letter-action-btn" id="letter-done-btn">Close Letter ❤️</button>
       </div>
@@ -255,9 +245,9 @@
   </div>
 
 
-  <!-- Base64 Embedded Netflix Audio Data -->
+  
   <script src="audio_data.js"></script>
-  <!-- Main script — all your editable content data is at the top of this file -->
+  
   <script src="script.js"></script>
 </body>
 
